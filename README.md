@@ -25,3 +25,4 @@ http://127.0.0.1:8000/taskdetails/
 6. Again select the user to see the task details in datatable.
 7. Update( Select a row from datatable and click update task button to update)
 8. Delete(select a row u want to delete and click delete button)
+ 
