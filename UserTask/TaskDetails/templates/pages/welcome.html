@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+{%load static%}
+<link href="{% static '/style.css'%}" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="{% static '/commonajax.js'%}"></script>
+<script src="{% static '/task.js'%}"></script>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="first-div" >
+<h1>Users Details</h1>
+        <div class=".messagees" style=" float: right;margin-top: -50px;" ><h2>Welcome {{message}}</h2> </div>
+<form id="getuserstask" action="/taskdetails/getuserstask" method="get">
+    {% csrf_token %}
+  <label>Select a user</label>
+  <select name="user" id="loadusers">
+      <option value="0">Select User</option>
+      {% for key, value in userlist.items %}
+    <tr>
+       <td> <option value= {{key}} >{{value}}</option> </td>
+    </tr>
+{% endfor %}
+
+  </select>
+  <br><br>
+
+</form>
+    </div>
+
+    <div id="second-div" style="margin-top: 25px;">
+
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_add" id="addusername">Add Task</button>
+
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_update" id="updategetselected">Update Task</button>
+<button class="btn btn-info btn-lg" id="button_delete">Delete Task</button>
+  <!-- Modal  Add-->
+  <div class="modal fade" id="myModal_add" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Task</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                  <label for="taskusername">Username</label>
+                    <select name="taskusername" id="taskusername" tabindex="2" class="form-control" placeholder="Enter username..">
+                    </select>
+                  </div>
+
+
+              <div class="form-group">
+                  <label for="tasktitle">TaskTitle</label>
+                    <input type="text" name="tasktitle" id="tasktitle" tabindex="1" class="form-control" placeholder="Enter Task Title.." value="">
+                  </div>
+                  <div class="form-group">
+                  <label for="taskdesc">TaskDesciption</label>
+                    <input type="text" name="taskdesc" id="taskdesc" tabindex="2" class="form-control" placeholder="Enter task Description..">
+                  </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+            {% csrf_token %}
+
+          <button type="button" class="btn btn-default " id="addTask" data-dismiss="modal">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+     <!-- Modal Update-->
+  <div class="modal fade" id="myModal_update" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Task</h4>
+        </div>
+        <div class="modal-body">
+
+
+
+              <div class="form-group">
+                  <label for="updatetasktitle">TaskTitle</label>
+                    <input type="text" name="updatetasktitle" id="updatetasktitle" tabindex="1" class="form-control" placeholder="Enter Task Title.." value="">
+                  </div>
+                  <div class="form-group">
+                  <label for="updatetaskdesc">TaskDesciption</label>
+                    <input type="text" name="updatetaskdesc" id="updatetaskdesc" tabindex="2" class="form-control" placeholder="Enter task Description..">
+                  </div>
+             <div class="form-group">
+                  <label for="status">Status</label>
+                    <input type="text" name="status" id="status" tabindex="2" class="form-control" placeholder="Enter status..">
+                  </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default " id="updateTask" data-dismiss="modal">Update</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+        <table id="userTable" class="display nowrap" style="width:100%">
+    <thead>
+       <tr>
+                <th>TaskId</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+
+            </tr>
+    </thead>
+
+</table>
+
+		</div>
+
+</div>
+
+
+</body>
+</html>
